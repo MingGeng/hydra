@@ -68,7 +68,7 @@ public class ServiceMapperImpl implements ServiceMapper {
 
     @Override
     public List<ServicePara> get(Integer appId) {
-        return (List<ServicePara>)sqlSession.selectList("getServiceByAppId", appId);
+        return (List<ServicePara>) sqlSession.selectList("getServiceByAppId", appId);
     }
 
     public void setSqlSession(SqlSessionTemplate sqlSession) {

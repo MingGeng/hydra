@@ -6,15 +6,15 @@
 
     <groupId>com.jd.bdp</groupId>
     <artifactId>hydra</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0-RELEASES</version>
     <packaging>pom</packaging>
 
     <!-- 用于发布到外网maven库 -->
-    <parent>
+   <!--  <parent>
         <groupId>org.sonatype.oss</groupId>
         <artifactId>oss-parent</artifactId>
         <version>7</version>
-    </parent>
+    </parent> -->
 
     <name>HYDRA</name>
 
@@ -22,23 +22,23 @@
     <description></description>
     <url></url>
 
-    <distributionManagement>
-        <repository>
-            <id>nexus-releases</id>
-            <url>http://mvn.d.sohu.com/nexus/content/repositories/releases</url>
-        </repository>
-        <snapshotRepository>
-            <id>nexus-snapshots</id>
-            <url>http://mvn.d.sohu.com/nexus/content/repositories/snapshots</url>
-        </snapshotRepository>
-    </distributionManagement>
+	<distributionManagement>
+		<repository>
+		  <id>onelife-releases</id>
+		  <url>http://10.6.0.118:8080/nexus/content/repositories/onelife-releases</url>
+		</repository>
+		<snapshotRepository>
+		  <id>onelife-snapshorts</id>
+		  <url>http://10.6.0.118:8080/nexus/content/repositories/onelife-snapshorts</url>
+		</snapshotRepository>
+	</distributionManagement>
 
     <!-- scm待定 -->
-    <scm>
+<!--     <scm>
         <connection>scm:git:https://github.com/MarsYoung/hydra.git</connection>
         <url>scm:git:https://github.com/MarsYoung/hydra.git</url>
         <developerConnection>scm:git:https://github.com/MarsYoung/hydra.git</developerConnection>
-    </scm>
+    </scm> -->
 
     <licenses>
         <license>
@@ -50,27 +50,9 @@
 
     <developers>
         <developer>
-            <name>Biandi</name>
-            <id>biandi</id>
-            <email>biandi@jd.com</email>
-            <roles>
-                <role>Developer</role>
-            </roles>
-            <timezone>+8</timezone>
-        </developer>
-        <developer>
-            <name>Xiangkui</name>
-            <id>xiangkui</id>
-            <email>xiangkui@jd.com</email>
-            <roles>
-                <role>Developer</role>
-            </roles>
-            <timezone>+8</timezone>
-        </developer>
-        <developer>
-            <name>Liuyu</name>
-            <id>yfliuyu</id>
-            <email>yfliuyu@jd.com</email>
+            <name>Caohao</name>
+            <id>caohaogit</id>
+            <email>caohao@chinalife.com.hk</email>
             <roles>
                 <role>Developer</role>
             </roles>
@@ -81,7 +63,7 @@
     <!-- Modules -->
     <modules>
         <module>modules/hydra-web</module>
-        <module>modules/hydra-example</module>
+       <!--  <module>modules/hydra-example</module> -->
         <module>modules/hydra-client</module>
         <module>modules/hydra-interface</module>
         <module>modules/hydra-manager</module>
@@ -89,20 +71,21 @@
         <module>modules/hydra-collector-service</module>
         <module>modules/hydra-store</module>
         <module>modules/hydra-manager-db</module>
-        <module>modules/hydra-test</module>
+        <!-- <module>modules/hydra-test</module> -->
     </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <junit.version>4.9</junit.version>
+        <!-- <springframework-version>4.3.2.RELEASE</springframework-version> -->
         <springframework-version>3.1.2.RELEASE</springframework-version>
         <servlet.version>2.5</servlet.version>
         <jackson.version>1.9.10</jackson.version>
-        <fastjson.version>1.1.28</fastjson.version>
+        <fastjson.version>1.1.41</fastjson.version>
         <jsp-api.version>2.1</jsp-api.version>
         <jstl-api.version>1.2</jstl-api.version>
-        <dubbo.version>2.8.4</dubbo.version>
+        <dubbo.version>2.5.3</dubbo.version>
         <validation-api.version>1.0.0.GA</validation-api.version>
         <metamorphosis.version>1.4.3</metamorphosis.version>
         <disruptor.version>2.10.3</disruptor.version>
@@ -110,7 +93,7 @@
         <slf4j.version>1.6.4</slf4j.version>
         <log4j.version>1.2.15</log4j.version>
         <hessian.version>4.0.38</hessian.version>
-        <zkclient.version>0.1</zkclient.version>
+        <zkclient.version>0.3</zkclient.version>
         <mybatis.version>3.0.6</mybatis.version>
         <mybatis-spring>1.0.0</mybatis-spring>
         <mysql-connector-java.version>5.1.22</mysql-connector-java.version>
@@ -141,11 +124,11 @@
                 <artifactId>hydra-collector</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <dependency>
+            <!-- <dependency>
                 <groupId>com.jd.bdp</groupId>
                 <artifactId>hydra-example</artifactId>
                 <version>${project.version}</version>
-            </dependency>
+            </dependency> -->
             <dependency>
                 <groupId>com.jd.bdp</groupId>
                 <artifactId>hydra-interface</artifactId>
@@ -166,11 +149,11 @@
                 <artifactId>hydra-store-interface</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <dependency>
+           <!--  <dependency>
                 <groupId>com.jd.bdp</groupId>
                 <artifactId>hydra-hbase</artifactId>
                 <version>${project.version}</version>
-            </dependency>
+            </dependency> -->
             <dependency>
                 <groupId>com.jd.bdp</groupId>
                 <artifactId>hydra-mysql</artifactId>
@@ -181,21 +164,21 @@
                 <artifactId>hydra-manager-db</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <dependency>
+            <!-- <dependency>
                 <groupId>com.jd.bdp</groupId>
                 <artifactId>hydra-test-benchmark</artifactId>
                 <version>${project.version}</version>
-            </dependency>
-            <dependency>
+            </dependency> -->
+           <!--  <dependency>
                 <groupId>com.jd.bdp</groupId>
                 <artifactId>hydra-example-exp1</artifactId>
                 <version>${project.version}</version>
-            </dependency>
-            <dependency>
+            </dependency> -->
+           <!--  <dependency>
                 <groupId>com.jd.bdp</groupId>
                 <artifactId>hydra-example-exp2</artifactId>
                 <version>${project.version}</version>
-            </dependency>
+            </dependency> -->
             <!-- test -->
             <dependency>
                 <groupId>junit</groupId>
@@ -238,11 +221,13 @@
                 <artifactId>spring-webmvc</artifactId>
                 <version>${springframework-version}</version>
             </dependency>
+            
             <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-test</artifactId>
-                <version>${springframework-version}</version>
-            </dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-test</artifactId>
+				<version>${springframework-version}</version>
+				<!-- <scope>test</scope> -->
+			</dependency>
             <!-- servlet-->
             <dependency>
                 <groupId>javax.servlet</groupId>
@@ -361,11 +346,11 @@
                 <version>${disruptor.version}</version>
             </dependency>
             <!-- serialize -->
-            <dependency>
+            <!-- <dependency>
                 <groupId>com.jd.dd</groupId>
                 <artifactId>glowworm</artifactId>
                 <version>${glowworm.version}</version>
-            </dependency>
+            </dependency> -->
             <dependency>
                 <groupId>com.caucho</groupId>
                 <artifactId>hessian</artifactId>
@@ -373,10 +358,15 @@
             </dependency>
             <!-- zookeeper -->
             <dependency>
-                <groupId>com.github.sgroschupf</groupId>
-                <artifactId>zkclient</artifactId>
-                <version>${zkclient.version}</version>
-            </dependency>
+				<groupId>com.101tec</groupId>
+				<artifactId>zkclient</artifactId>
+				<version>${zkclient.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.zookeeper</groupId>
+				<artifactId>zookeeper</artifactId>
+				<version>3.4.5</version>
+			</dependency>
             <!-- db -->
             <dependency>
                 <groupId>org.mybatis</groupId>
@@ -449,29 +439,64 @@
     <build>
         <pluginManagement>
             <plugins>
+            
+            
+            <!-- eclipse插件 -->
+            <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.8</version>
+			</plugin>
+            
             <!-- compiler插件, 设定JDK版本 -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.5.1</version>
+				<configuration>
+					<!-- <failOnError>true</failOnError>
+					<verbose>true</verbose>
+					<fork>true</fork>
+					<compilerArgument>-nowarn</compilerArgument> -->
+					<source>1.6</source>
+					<target>1.6</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+            
 
             <!-- test插件 -->
-            <plugin>
+           <!--  <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                    <!--<skip>true</skip>-->
+                    <skip>true</skip>
                     <failIfNoTests>false</failIfNoTests>
                     <includes>
                         <include>**/*Test.java</include>
                     </includes>
                 </configuration>
+            </plugin> -->
+            
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>2.1</version>
             </plugin>
+            
+            <plugin>
+			     <groupId>org.apache.maven.plugins</groupId>
+			     <artifactId>maven-surefire-plugin</artifactId>
+			     <extensions>true</extensions>
+			     <version>2.19.1</version>
+			     <configuration>
+			           <testFailureIgnore>true</testFailureIgnore>
+			           <!-- <argLine>${maven.test.jvmargs}</argLine> -->
+			           <excludes>
+			              <exclude>**/*Test.java</exclude>  
+			           </excludes>
+			      </configuration>
+			</plugin>
 
             <!-- resource插件, 设定编码 -->
             <plugin>
@@ -496,9 +521,13 @@
 
             <!-- deploy插件-->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-deploy-plugin</artifactId>
-            </plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>2.8.2</version>
+				<configuration>
+					<uniqueVersion>false</uniqueVersion>
+				</configuration>
+			</plugin>
 
 
             <!-- war插件-->
@@ -524,9 +553,18 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-            </plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>3.0.1</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 
             <!-- dependency插件 -->
             <plugin>
@@ -545,7 +583,7 @@
     </build>
 
     <!-- glowworm序列化组建上传到这个maven仓库中 -->
-    <repositories>
+<!--     <repositories>
         <repository>
             <id>sonatype</id>
             <url>
@@ -558,6 +596,6 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
-    </repositories>
+    </repositories> -->
 
 </project>

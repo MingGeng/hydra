@@ -1,19 +1,18 @@
 package com.jd.bdp.hydra.collector.service;
 
-import com.jd.bdp.hydra.Span;
-import com.jd.bdp.hydra.store.inter.InsertService;
-import com.jd.dd.glowworm.PB;
-import com.taobao.metamorphosis.Message;
-import com.taobao.metamorphosis.client.consumer.MessageConsumer;
-import com.taobao.metamorphosis.client.consumer.MessageListener;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.jd.bdp.hydra.Span;
+import com.jd.bdp.hydra.store.inter.InsertService;
+import com.taobao.metamorphosis.Message;
+import com.taobao.metamorphosis.client.consumer.MessageConsumer;
+import com.taobao.metamorphosis.client.consumer.MessageListener;
 
 /**
  * Date: 13-4-17
@@ -58,19 +57,19 @@ public class CollectorSerService {
     public void persistent(Message message) {
         List<Span> spanList;
         try {
-            spanList = (List) PB.parsePBBytes(message.getData());
+           /* spanList = (List) PB.parsePBBytes(message.getData());*/
         } catch (Exception e) {
             log.error(e.getMessage());
             return;
         }
         try {
-            if (spanList != null) {
+           /* if (spanList != null) {
                 for (Span s : spanList) {
                     insertService.addSpan(s);
                     insertService.addAnnotation(s);
                     insertService.addTrace(s);
                 }
-            }
+            }*/
         } catch (Exception e) {
             e.printStackTrace();
             log.error(e.getMessage());

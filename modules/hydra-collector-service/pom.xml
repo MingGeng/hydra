@@ -5,7 +5,7 @@
     <parent>
         <artifactId>hydra</artifactId>
         <groupId>com.jd.bdp</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0-RELEASES</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -20,10 +20,10 @@
             <groupId>com.jd.bdp</groupId>
             <artifactId>hydra-store-interface</artifactId>
         </dependency>
-        <dependency>
+       <!--  <dependency>
             <groupId>com.jd.bdp</groupId>
             <artifactId>hydra-hbase</artifactId>
-        </dependency>
+        </dependency> -->
         <dependency>
             <groupId>com.jd.bdp</groupId>
             <artifactId>hydra-mysql</artifactId>
@@ -36,10 +36,10 @@
             <groupId>com.taobao.metamorphosis</groupId>
             <artifactId>metamorphosis-tools</artifactId>
         </dependency>
-        <dependency>
+        <!-- <dependency>
             <groupId>com.jd.dd</groupId>
             <artifactId>glowworm</artifactId>
-        </dependency>
+        </dependency> -->
         <!--spring -->
         <dependency>
             <groupId>org.springframework</groupId>

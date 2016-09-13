@@ -3,7 +3,7 @@ package com.jd.bdp.hydra.dubbomonitor.provider.impl;
 import com.jd.bdp.hydra.Span;
 import com.jd.bdp.hydra.dubbomonitor.HydraDubbeConfig;
 import com.jd.bdp.hydra.dubbomonitor.HydraService;
-import com.jd.dd.glowworm.PB;
+//import com.jd.dd.glowworm.PB;
 import com.taobao.metamorphosis.Message;
 import com.taobao.metamorphosis.client.MessageSessionFactory;
 import com.taobao.metamorphosis.client.MetaClientConfig;
@@ -55,21 +55,21 @@ public class HydraServiceImpl implements HydraService {
     @Override
     public boolean push(List<Span> span) {
         boolean rs = false;
-        if(span != null){
-            byte[] b = PB.toPBBytes(span);
-            try {
-                SendResult sendResult = messageProducer.sendMessage(new Message(topic,b));
-                if (sendResult.isSuccess()){
-                    rs = true;
-                }
-            } catch (MetaClientException e) {
-                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-            } catch (InterruptedException e) {
-                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-            } finally {
-
-            }
-        }
+//        if(span != null){
+//            byte[] b = PB.toPBBytes(span);
+//            try {
+//                SendResult sendResult = messageProducer.sendMessage(new Message(topic,b));
+//                if (sendResult.isSuccess()){
+//                    rs = true;
+//                }
+//            } catch (MetaClientException e) {
+//                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+//            } finally {
+//
+//            }
+//        }
         return rs;
     }
 }
