@@ -63,7 +63,7 @@
     <!-- Modules -->
     <modules>
         <module>modules/hydra-web</module>
-       <!--  <module>modules/hydra-example</module> -->
+        <module>modules/hydra-example</module>
         <module>modules/hydra-client</module>
         <module>modules/hydra-interface</module>
         <module>modules/hydra-manager</module>
@@ -71,7 +71,7 @@
         <!-- <module>modules/hydra-collector-service</module> -->
         <module>modules/hydra-store</module>
         <module>modules/hydra-manager-db</module>
-        <!-- <module>modules/hydra-test</module> -->
+        <module>modules/hydra-test</module>
     </modules>
 
     <properties>
@@ -124,11 +124,11 @@
                 <artifactId>hydra-collector</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <!-- <dependency>
+            <dependency>
                 <groupId>com.jd.bdp</groupId>
                 <artifactId>hydra-example</artifactId>
                 <version>${project.version}</version>
-            </dependency> -->
+            </dependency>
             <dependency>
                 <groupId>com.jd.bdp</groupId>
                 <artifactId>hydra-interface</artifactId>
@@ -164,21 +164,21 @@
                 <artifactId>hydra-manager-db</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <!-- <dependency>
+            <dependency>
                 <groupId>com.jd.bdp</groupId>
                 <artifactId>hydra-test-benchmark</artifactId>
                 <version>${project.version}</version>
-            </dependency> -->
-           <!--  <dependency>
+            </dependency>
+            <dependency>
                 <groupId>com.jd.bdp</groupId>
                 <artifactId>hydra-example-exp1</artifactId>
                 <version>${project.version}</version>
-            </dependency> -->
-           <!--  <dependency>
+            </dependency>
+            <dependency>
                 <groupId>com.jd.bdp</groupId>
                 <artifactId>hydra-example-exp2</artifactId>
                 <version>${project.version}</version>
-            </dependency> -->
+            </dependency>
             <!-- test -->
             <dependency>
                 <groupId>junit</groupId>

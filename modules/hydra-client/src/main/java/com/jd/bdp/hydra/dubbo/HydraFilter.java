@@ -29,6 +29,7 @@ import com.jd.bdp.hydra.agent.Tracer;
 import com.jd.bdp.hydra.agent.support.TracerUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeansException;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -158,12 +159,27 @@ public class HydraFilter implements Filter {
 
     /*加载Filter的时候加载hydra配置上下文*/
     static {
-        logger.info("Hydra filter is loading hydra-config file...");
-        String resourceName = "classpath*:/spring/hydra-config.xml";
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{
-                resourceName
-        });
-        logger.info("Hydra config context is starting,config file path is:" + resourceName);
-        context.start();
+//        logger.info("Hydra filter is loading hydra-config file...");
+//        String resourceName = "classpath*:/spring/hydra-config.xml";
+////        String resourceName = "classpath*:/hydra-config.xml";
+//        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{
+//                resourceName
+//        });
+//        logger.info("Hydra config context is starting,config file path is:" + resourceName);
+//        context.start();
+//        logger.info("Hydra config context is started,context is:"+context);
+//        
+//        try {
+//			if(context != null){
+//				
+//				Tracer tracer = context.getBean(Tracer.class);
+//				logger.info("Hydra config context is started,tracer is:"+tracer);
+//				
+//			}
+//		} catch (Throwable e) {
+//			// TODO Auto-generated catch block
+//			logger.error(e.getMessage(),e);
+//		}
+//        
     }
 }

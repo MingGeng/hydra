@@ -16,7 +16,6 @@
 
 package com.jd.bdp.hydra.benchmark.startCollectorService;
 
-import com.jd.bdp.hydra.collector.service.CollectorSerService;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -30,8 +29,8 @@ public class StartCollectorService {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{
                 "classpath*:hydra-collector-service.xml"
         });
-        CollectorSerService collectorSerService = (CollectorSerService)context.getBean("collectorSerService");
-        collectorSerService.subscribe();
-        Thread.sleep(999999999);
+//        CollectorSerService collectorSerService = (CollectorSerService)context.getBean("collectorSerService");
+//        collectorSerService.subscribe();
+//        Thread.sleep(999999999);
     }
 }

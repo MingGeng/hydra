@@ -5,7 +5,7 @@
     <parent>
         <artifactId>hydra</artifactId>
         <groupId>com.jd.bdp</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0-RELEASES</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -24,7 +24,7 @@
             <artifactId>dubbo</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.github.sgroschupf</groupId>
+            <groupId>com.101tec</groupId>
             <artifactId>zkclient</artifactId>
         </dependency>
     </dependencies>
