@@ -7,5 +7,5 @@ import java.io.IOException;
 import java.util.List;
 
 public interface HydraService {
-    boolean push(List<Span> span) throws IOException;
+	public boolean push(List<Span> span) throws IOException;
 }

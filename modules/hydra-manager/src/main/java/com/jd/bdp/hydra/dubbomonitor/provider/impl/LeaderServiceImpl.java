@@ -16,7 +16,12 @@ import java.util.Map;
  */
 public class LeaderServiceImpl implements LeaderService {
 
-    @Override
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Override
     public Map<String, String> registerClient(String name, List<String> services) {
         long startTime=System.currentTimeMillis();
         HashMap<String, String> map = new HashMap<String, String>();

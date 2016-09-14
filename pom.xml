@@ -23,14 +23,18 @@
     <url></url>
 
 	<distributionManagement>
-		<repository>
+		<!-- <repository>
 		  <id>onelife-releases</id>
 		  <url>http://10.6.0.118:8080/nexus/content/repositories/onelife-releases</url>
 		</repository>
 		<snapshotRepository>
 		  <id>onelife-snapshorts</id>
 		  <url>http://10.6.0.118:8080/nexus/content/repositories/onelife-snapshorts</url>
-		</snapshotRepository>
+		</snapshotRepository> -->
+		<repository>
+		  <id>onelife-releases</id>
+		  <url>http://10.6.0.118:8080/nexus/content/repositories/onelife-3rd-party</url>
+		</repository>
 	</distributionManagement>
 
     <!-- scm待定 -->
@@ -75,6 +79,7 @@
     </modules>
 
     <properties>
+    	<java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <junit.version>4.9</junit.version>
@@ -103,7 +108,7 @@
         <commons-configuration.version>1.9</commons-configuration.version>
         <commons-lang3.version>3.4</commons-lang3.version>
         <druid.version>0.2.17</druid.version>
-        <javassist_version>3.19.0-GA</javassist_version>
+        <javassist_version>3.20.0-GA</javassist_version>
     </properties>
 
     <dependencyManagement>
@@ -458,8 +463,8 @@
 					<verbose>true</verbose>
 					<fork>true</fork>
 					<compilerArgument>-nowarn</compilerArgument> -->
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
