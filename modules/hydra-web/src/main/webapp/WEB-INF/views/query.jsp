@@ -4,6 +4,7 @@
     <script language="javascript" type="text/javascript">
         var ctp = "<%=request.getContextPath() %>";
     </script>
+    <link rel="shortcut icon" href="<%=request.getContextPath() %>/statics/img/favicon.ico">
     <link href="<%=request.getContextPath() %>/statics/lib/bootstrap/datetimepicker/css/datetimepicker.css" rel="stylesheet" media="screen">
     <link href="<%=request.getContextPath() %>/statics/lib/DataTables-1.9.4/media/css/jquery.dataTables.css" rel="stylesheet" type="text/css"/>
     <link href="<%=request.getContextPath() %>/statics/lib/jquery.qtip.min.css" rel="stylesheet" type="text/css"/>

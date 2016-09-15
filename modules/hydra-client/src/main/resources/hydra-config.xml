@@ -11,6 +11,7 @@
         <property name="delayTime" value="3000"></property>
         <property name="flushSize" value="10"></property>
         <property name="queueSize" value="1024"></property>
+        <property name="applicationName"  value="test"></property>
     </bean>
     <!--leadService-->
     <dubbo:reference id="leaderService" interface="com.jd.bdp.hydra.dubbomonitor.LeaderService" check="false"

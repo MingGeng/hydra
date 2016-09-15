@@ -9,7 +9,7 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>hydra-web</artifactId>
+    <artifactId>imodule-log-web</artifactId>
     <packaging>war</packaging>
 
     <name>HYDRA WEB</name>
@@ -104,6 +104,6 @@
     </dependencies>
 
     <build>
-        <finalName>hydra-web</finalName>
+        <finalName>imodule-log-web</finalName>
     </build>
 </project>

@@ -40,6 +40,7 @@ public class DefaultSyncTransfer implements SyncTransfer {
 
     private TransferTask task;
 
+    private String applicationName = "test";
 
     @Override
     public void setTraceService(TraceService traceService) {
@@ -53,12 +54,13 @@ public class DefaultSyncTransfer implements SyncTransfer {
         this.spansCache = new ArrayList<Span>();
         this.executors = Executors.newSingleThreadScheduledExecutor();
         this.task = new TransferTask();
+        this.applicationName = c.getApplicationName() == null?"test":c.getApplicationName();
     }
 
     @Override
     public String appName() {
         //fixme
-        return "test";
+        return applicationName;
     }
 
     private class TransferTask extends Thread {

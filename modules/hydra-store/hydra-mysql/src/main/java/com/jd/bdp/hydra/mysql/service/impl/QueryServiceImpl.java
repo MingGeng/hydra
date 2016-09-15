@@ -1,6 +1,12 @@
 package com.jd.bdp.hydra.mysql.service.impl;
 
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.log4j.Logger;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -13,19 +19,18 @@ import com.jd.bdp.hydra.mysql.persistent.entity.Absannotation;
 import com.jd.bdp.hydra.mysql.persistent.entity.Trace;
 import com.jd.bdp.hydra.store.inter.QueryService;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 /**
  * User: biandi
  * Date: 13-5-9
  * Time: 下午4:13
  */
 public class QueryServiceImpl implements QueryService {
-
+	
+	private static final Logger logger = Logger.getLogger(QueryServiceImpl.class);
+	
     @Override
     public JSONObject getTraceInfo(Long traceId) {
+    	logger.debug("getTraceInfo , parm : traceId = "+traceId);
         try {
             List<Span> spans = spanMapper.findSpanByTraceId(traceId);
             List<Absannotation> annotations = annotationMapper.getAnnotations(spans);
@@ -84,6 +89,7 @@ public class QueryServiceImpl implements QueryService {
     }
 
     public void setSpanDuration(JSONObject spanDuration) {
+    	logger.debug("setSpanDuration , parm : spanDuration = "+spanDuration);
         JSONArray serverAnns = spanDuration.getJSONArray("annotations");
         Long sr = null;
         Long ss = null;
@@ -141,6 +147,7 @@ public class QueryServiceImpl implements QueryService {
 
     @Override
     public JSONArray getTracesByDuration(String serviceId, Long startTime, int sum, int durationMin, int durationMax) {
+    	logger.debug("getTracesByDuration , parm : serviceId = "+serviceId+" startTime = "+startTime+" sum = "+sum+" durationMin = "+durationMin+" durationMax = "+durationMax);
         List<Trace> list = traceMapper.findTracesByDuration(serviceId, startTime, durationMin, durationMax, sum);
         JSONArray array = new JSONArray();
         for (Trace trace : list) {
@@ -156,6 +163,7 @@ public class QueryServiceImpl implements QueryService {
 
     @Override
     public JSONArray getTracesByEx(String serviceId, Long startTime, int sum) {
+    	logger.debug("getTracesByDuration , parm : serviceId = "+serviceId+" startTime = "+startTime+" sum = "+sum);
         List<Trace> list = traceMapper.findTracesEx(serviceId, startTime, sum);
         JSONArray array = new JSONArray();
         for (Trace trace : list) {

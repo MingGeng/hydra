@@ -15,26 +15,24 @@
  */
 package com.jd.bdp.hydra.dubbo;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.extension.Activate;
-import com.alibaba.dubbo.common.extension.ExtensionLoader;
-import com.alibaba.dubbo.container.Container;
-import com.alibaba.dubbo.container.spring.SpringContainer;
 import com.alibaba.dubbo.remoting.TimeoutException;
-import com.alibaba.dubbo.rpc.*;
+import com.alibaba.dubbo.rpc.Filter;
+import com.alibaba.dubbo.rpc.Invocation;
+import com.alibaba.dubbo.rpc.Invoker;
+import com.alibaba.dubbo.rpc.Result;
+import com.alibaba.dubbo.rpc.RpcContext;
+import com.alibaba.dubbo.rpc.RpcException;
+import com.alibaba.dubbo.rpc.RpcInvocation;
 import com.jd.bdp.hydra.BinaryAnnotation;
 import com.jd.bdp.hydra.Endpoint;
 import com.jd.bdp.hydra.Span;
 import com.jd.bdp.hydra.agent.Tracer;
 import com.jd.bdp.hydra.agent.support.TracerUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeansException;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
-
-import java.io.IOException;
 
 /**
  *
@@ -48,8 +46,18 @@ public class HydraFilter implements Filter {
 
     // 调用过程拦截
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
-        //异步获取serviceId，没获取到不进行采样
-        String serviceId = tracer.getServiceId(RpcContext.getContext().getUrl().getServiceInterface());
+        
+    	//异步获取serviceId，没获取到不进行采样
+    	String serviceId = null;
+        try {
+			serviceId = tracer.getServiceId(RpcContext.getContext().getUrl().getServiceInterface());
+		} catch (Exception e) {
+			logger.error("Fail to invoke HydraFilter#invoke Parm is invoker="+invoker+",invocation="+invocation,e);
+			return invoker.invoke(invocation);
+		}finally {
+			logger.info("HydraFilter#invoke Parm is invoker="+invoker+",invocation="+invocation+",serviceId="+serviceId);
+		}
+        
         if (serviceId == null) {
             Tracer.startTraceWork();
             return invoker.invoke(invocation);
