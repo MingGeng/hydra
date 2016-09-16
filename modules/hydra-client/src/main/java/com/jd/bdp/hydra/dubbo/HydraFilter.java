@@ -56,15 +56,17 @@ public class HydraFilter implements Filter {
     	String serviceId = null;
         try {
 			serviceId = tracer.getServiceId(RpcContext.getContext().getUrl().getServiceInterface());
-		} catch (Exception e) {
-			logger.error(logStr.toString()+e.getMessage(),e);
+		} catch (Throwable e) {
+			logStr.append("serviceId="+serviceId+" - "+e.getMessage());
+			System.out.println(logStr.toString());
+			logger.error(logStr.toString(),e);
 			return invoker.invoke(invocation);
 		}finally {
 			logStr.append("serviceId="+serviceId+" - ");
 		}
         
         if (serviceId == null) {
-        	logger.warn(logStr.toString()+"未发现服务ID");
+        	System.out.println(logStr.toString()+"未发现服务ID");
             Tracer.startTraceWork();
             return invoker.invoke(invocation);
         }
