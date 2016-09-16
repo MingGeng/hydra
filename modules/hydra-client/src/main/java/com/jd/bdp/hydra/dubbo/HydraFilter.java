@@ -49,6 +49,9 @@ public class HydraFilter implements Filter {
         
 //    	logger.info("HydraFilter#invoke ################### Begin ###################  "+new Date());
     	
+    	
+    	StringBuilder logStr = new StringBuilder();
+    	logStr.append("HydraFilter#invoke Parm={invoker=["+invoker+"] - invocation=["+invocation+"]} - ");
     	//异步获取serviceId，没获取到不进行采样
     	String serviceId = null;
         try {
@@ -57,10 +60,12 @@ public class HydraFilter implements Filter {
 			logger.error("Fail to invoke HydraFilter#invoke Parm is invoker="+invoker+",invocation="+invocation,e);
 			return invoker.invoke(invocation);
 		}finally {
-			System.out.println("HydraFilter#invoke Parm is invoker="+invoker+",invocation="+invocation+",serviceId="+serviceId);
+			logStr.append("serviceId="+serviceId+" - ");
+			System.out.println(logStr.toString());
 		}
         
         if (serviceId == null) {
+        	logger.warn(logStr.toString()+"未发现服务ID");
             Tracer.startTraceWork();
             return invoker.invoke(invocation);
         }
@@ -82,13 +87,14 @@ public class HydraFilter implements Filter {
             logger.debug("HydraFilter#invoke isConsumerSide="+isConsumerSide+",isProviderSide="+isProviderSide+",EndPoint="+endpoint);
             
             if (isConsumerSide) { //是否是消费者
+            	logStr.append("[消费端] - ");
                 Span span1 = tracer.getParentSpan();
                 if (span1 == null) { //为rootSpan
                     span = tracer.newSpan(context.getMethodName(), endpoint, serviceId);//生成root Span
                 } else {
                     span = tracer.genSpan(span1.getTraceId(), span1.getId(), tracer.genSpanId(), context.getMethodName(), span1.isSample(), null);
                 }
-                logger.debug("HydraFilter#invoke 消费端  ParentSpan="+span1+",span="+span);
+                logStr.append("ParentSpan=["+span1+"] - span=["+span+"]");
             } else if (isProviderSide) {
                 Long traceId, parentId, spanId;
                 traceId = TracerUtils.getAttachmentLong(invocation.getAttachment(TracerUtils.TID));
@@ -96,7 +102,7 @@ public class HydraFilter implements Filter {
                 spanId = TracerUtils.getAttachmentLong(invocation.getAttachment(TracerUtils.SID));
                 boolean isSample = (traceId != null);
                 span = tracer.genSpan(traceId, parentId, spanId, context.getMethodName(), isSample, serviceId);
-                logger.debug("HydraFilter#invoke 服务端  span="+span);
+                logStr.append("[服务端] - span=["+span+"] - ");
             }else{
             	
             }
@@ -105,6 +111,7 @@ public class HydraFilter implements Filter {
             setAttachment(span, invocation1);//设置需要向下游传递的参数
             Result result = invoker.invoke(invocation);
             if (result.getException() != null){
+            	logStr.append("result=["+result+"] - ");
             	logger.warn("HydraFilter#invoke fail  result="+result);
                 catchException(result.getException(), endpoint);
             }
@@ -115,6 +122,7 @@ public class HydraFilter implements Filter {
             }else {
                 catchException(e, endpoint);
             }
+            logStr.append("Happen Exception ["+e.getMessage()+"] - ");
             logger.error("HydraFilter#invoke Parm is invoker="+invoker+",invocation="+invocation+",serviceId="+serviceId+","+e.getMessage(),e);
             throw e;
         }finally {
@@ -124,6 +132,7 @@ public class HydraFilter implements Filter {
             }
             
 //            logger.info("HydraFilter#invoke ################### End ###################  "+new Date()+"\n\n");
+            System.out.println(logStr.toString());
         }
     }
 
