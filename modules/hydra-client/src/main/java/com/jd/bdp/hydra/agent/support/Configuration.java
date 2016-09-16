@@ -61,4 +61,9 @@ public class Configuration {
     public void setQueueSize(Integer queueSize) {
         this.queueSize = queueSize;
     }
+
+	public String toString() {
+		return "Configuration [applicationName=" + applicationName + ", services=" + services + ", delayTime="
+				+ delayTime + ", flushSize=" + flushSize + ", queueSize=" + queueSize + "]";
+	}
 }

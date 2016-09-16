@@ -51,18 +51,20 @@ public class HydraFilter implements Filter {
     	
     	long s = System.currentTimeMillis();
     	StringBuilder logStr = new StringBuilder();
-    	logStr.append("【平台日志】 - HydraFilter#invoke Parm={invoker=["+invoker+"] - invocation=["+invocation+"]} - ");
+    	logStr.append("【平台日志】 - HydraFilter#invoke Parm={ invoker=["+invoker+"] - invocation=["+invocation+"] } - ");
     	//异步获取serviceId，没获取到不进行采样
     	String serviceId = null;
         try {
-			serviceId = tracer.getServiceId(RpcContext.getContext().getUrl().getServiceInterface());
+        	String serviceInterface = RpcContext.getContext().getUrl().getServiceInterface();
+        	logStr.append("serviceInterface=["+serviceInterface+"]");
+			serviceId = tracer.getServiceId(serviceInterface);
 		} catch (Throwable e) {
-			logStr.append("serviceId="+serviceId+" - "+e.getMessage());
+			logStr.append("serviceId=["+serviceId+"] - "+e.getMessage());
 			System.out.println(logStr.toString());
 			logger.error(logStr.toString(),e);
 			return invoker.invoke(invocation);
 		}finally {
-			logStr.append("serviceId="+serviceId+" - ");
+			logStr.append("serviceId=["+serviceId+"] - ");
 		}
         
         if (serviceId == null) {
@@ -85,7 +87,7 @@ public class HydraFilter implements Filter {
             endpoint.setPort(context.getLocalPort());
             
             
-            logger.debug("HydraFilter#invoke isConsumerSide="+isConsumerSide+",isProviderSide="+isProviderSide+",EndPoint="+endpoint);
+            logger.debug("HydraFilter#invoke isConsumerSide=["+isConsumerSide+"],isProviderSide=["+isProviderSide+"],EndPoint=["+endpoint+"]");
             
             if (isConsumerSide) { //是否是消费者
             	logStr.append("[消费端] - ");
@@ -111,10 +113,13 @@ public class HydraFilter implements Filter {
             RpcInvocation invocation1 = (RpcInvocation) invocation;
             setAttachment(span, invocation1);//设置需要向下游传递的参数
             Result result = invoker.invoke(invocation);
-            logStr.append("result=["+result+"] - ");
+            
             if (result.getException() != null){
+            	logStr.append("result=[false]["+result.getException()+"] - ");
             	logger.warn("HydraFilter#invoke fail  result="+result);
                 catchException(result.getException(), endpoint);
+            }else{
+            	logStr.append("result=[true] - ");
             }
             return result;
         }catch (RpcException e) {
@@ -124,7 +129,7 @@ public class HydraFilter implements Filter {
                 catchException(e, endpoint);
             }
             logStr.append("Happen Exception ["+e.getMessage()+"] - ");
-            logger.error("HydraFilter#invoke Parm is invoker="+invoker+",invocation="+invocation+",serviceId="+serviceId+","+e.getMessage(),e);
+            logger.error("HydraFilter#invoke Parm is invoker=["+invoker+"],invocation=["+invocation+"],serviceId=["+serviceId+"],"+e.getMessage(),e);
             throw e;
         }finally {
             if (span != null) {

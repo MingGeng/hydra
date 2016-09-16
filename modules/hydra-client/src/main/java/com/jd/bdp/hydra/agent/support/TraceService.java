@@ -44,10 +44,11 @@ public class TraceService implements RegisterService, CollectorService {
 
     @Override
     public boolean registerService(String name, List<String> services) {
-        logger.info("TraceService#registerService "+name + " " + services);
+//        logger.info("TraceService#registerService "+name + " " + services);
         try {
             this.registerInfo = leaderService.registerClient(name, services);
         } catch (Exception e) {
+        	System.out.println("【平台日志】 - Fail to invoke TraceService#registerService - name=["+name+"] - services=["+services+"] - exception=["+e.getMessage()+"]");
             logger.error("[Hydra] Client global config-info cannot regist into the hydra system",e);
             logger.warn("[Hydra] Client global config-info cannot regist into the hydra system",e);
         }
@@ -55,25 +56,35 @@ public class TraceService implements RegisterService, CollectorService {
             logger.info("[Hydra] Global registry option is ok!");
             isRegister = true;
         }
+        
+        System.out.println("【平台日志】 - TraceService#registerService appName=["+name + "] - services=[" + services+"] - result=["+isRegister+"]["+registerInfo+"]");
+        
         return isRegister;
     }
 
     /*更新注册信息*/
     @Override
     public boolean registerService(String appName, String serviceName) {
-        logger.info("TraceService#registerService "+appName + " " + serviceName);
-        String serviceId = null;
+//        logger.info("TraceService#registerService "+appName + " " + serviceName);
+    	String serviceId = null;
+    	boolean result = false;
         try {
-            serviceId = leaderService.registerClient(appName, serviceName);
-        } catch (Exception e) {
-            logger.warn("[Hydra] client cannot regist service <" + serviceName + "> into the hydra system",e);
-        }
-        if (serviceId != null) {
-            logger.info("[Hydra] Registry ["+serviceName+"] option is ok!");
-            registerInfo.put(serviceName, serviceId); //更新本地注册信息
-            return true;
-        } else
-            return false;
+			try {
+			    serviceId = leaderService.registerClient(appName, serviceName);
+			} catch (Exception e) {
+			    logger.warn("[Hydra] client cannot regist service <" + serviceName + "> into the hydra system",e);
+			}
+			if (serviceId != null) {
+			    logger.info("[Hydra] Registry ["+serviceName+"] option is ok!");
+			    registerInfo.put(serviceName, serviceId); //更新本地注册信息
+			    result = true;
+			} else{
+				result = false;
+			}
+			return result;
+		} finally{
+			System.out.println("【平台日志】 - TraceService#registerService - 更新注册信息 - appName=["+appName + "] - serviceName=[" + serviceName+"] - result=["+result+"]["+serviceId+"]");
+		}
     }
 
     public LeaderService getLeaderService() {

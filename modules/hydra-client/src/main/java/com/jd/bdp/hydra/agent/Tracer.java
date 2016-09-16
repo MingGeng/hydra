@@ -96,6 +96,7 @@ public class Tracer {
     //启动后台消息发送线程
     public static void startTraceWork() {
         try {
+        	System.out.println("【平台日志】 - Tracer#startTraceWork 启动后台消息发送线程 ");
             getTracer().start();
         } catch (Exception e) {
             logger.error(e.getMessage());
@@ -158,6 +159,8 @@ public class Tracer {
         String id = null;
         if (transfer != null) {
             id = transfer.getServiceId(name);
+        }else{
+        	System.out.println("【平台日志】 - Tracer#getServiceId transfer=["+transfer+"]");
         }
         return id;
     }

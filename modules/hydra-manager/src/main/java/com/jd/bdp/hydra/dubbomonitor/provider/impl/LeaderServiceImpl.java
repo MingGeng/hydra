@@ -1,13 +1,14 @@
 package com.jd.bdp.hydra.dubbomonitor.provider.impl;
 
-import com.jd.bdp.hydra.dubbomonitor.LeaderService;
-import com.jd.bdp.hydra.mysql.persistent.service.AppService;
-import com.jd.bdp.hydra.mysql.persistent.service.SeedService;
-import com.jd.bdp.hydra.mysql.persistent.service.ServiceService;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.jd.bdp.hydra.dubbomonitor.LeaderService;
+import com.jd.bdp.hydra.mysql.persistent.entity.ServicePara;
+import com.jd.bdp.hydra.mysql.persistent.service.AppService;
+import com.jd.bdp.hydra.mysql.persistent.service.SeedService;
+import com.jd.bdp.hydra.mysql.persistent.service.ServiceService;
 
 /**
  * User: biandi
@@ -30,6 +31,15 @@ public class LeaderServiceImpl implements LeaderService {
         for (String serviceName : services) {
             map.put("serviceName", serviceService.getServiceId(serviceName, name).toString());
         }
+        
+        List<ServicePara> srvParmList = serviceService.get(appService.getAppId(name));
+        
+        if(srvParmList!=null && !srvParmList.isEmpty()){
+        	for(ServicePara servicePara : srvParmList){
+        		map.put(servicePara.getName(), servicePara.getId());
+        	}
+        }
+        
         return map;
     }
 
