@@ -51,7 +51,7 @@ public class HydraFilter implements Filter {
     	
     	
     	StringBuilder logStr = new StringBuilder();
-    	logStr.append("HydraFilter#invoke Parm={invoker=["+invoker+"] - invocation=["+invocation+"]} - ");
+    	logStr.append("【平台日志】 - HydraFilter#invoke Parm={invoker=["+invoker+"] - invocation=["+invocation+"]} - ");
     	//异步获取serviceId，没获取到不进行采样
     	String serviceId = null;
         try {
