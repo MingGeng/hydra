@@ -57,11 +57,10 @@ public class HydraFilter implements Filter {
         try {
 			serviceId = tracer.getServiceId(RpcContext.getContext().getUrl().getServiceInterface());
 		} catch (Exception e) {
-			logger.error("Fail to invoke HydraFilter#invoke Parm is invoker="+invoker+",invocation="+invocation,e);
+			logger.error(logStr.toString()+e.getMessage(),e);
 			return invoker.invoke(invocation);
 		}finally {
 			logStr.append("serviceId="+serviceId+" - ");
-			System.out.println(logStr.toString());
 		}
         
         if (serviceId == null) {
