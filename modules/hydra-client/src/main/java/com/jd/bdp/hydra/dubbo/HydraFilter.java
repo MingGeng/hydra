@@ -109,8 +109,8 @@ public class HydraFilter implements Filter {
             RpcInvocation invocation1 = (RpcInvocation) invocation;
             setAttachment(span, invocation1);//设置需要向下游传递的参数
             Result result = invoker.invoke(invocation);
+            logStr.append("result=["+result+"] - ");
             if (result.getException() != null){
-            	logStr.append("result=["+result+"] - ");
             	logger.warn("HydraFilter#invoke fail  result="+result);
                 catchException(result.getException(), endpoint);
             }
@@ -131,6 +131,7 @@ public class HydraFilter implements Filter {
             }
             
 //            logger.info("HydraFilter#invoke ################### End ###################  "+new Date()+"\n\n");
+            logStr.append("调用完成");
             System.out.println(logStr.toString());
         }
     }
