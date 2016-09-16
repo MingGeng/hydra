@@ -49,7 +49,7 @@ public class HydraFilter implements Filter {
         
 //    	logger.info("HydraFilter#invoke ################### Begin ###################  "+new Date());
     	
-    	
+    	long s = System.currentTimeMillis();
     	StringBuilder logStr = new StringBuilder();
     	logStr.append("【平台日志】 - HydraFilter#invoke Parm={invoker=["+invoker+"] - invocation=["+invocation+"]} - ");
     	//异步获取serviceId，没获取到不进行采样
@@ -133,7 +133,8 @@ public class HydraFilter implements Filter {
             }
             
 //            logger.info("HydraFilter#invoke ################### End ###################  "+new Date()+"\n\n");
-            logStr.append("调用完成");
+            long e = System.currentTimeMillis();
+            logStr.append("调用完成 consume "+(e-s)+" millisecond.");
             System.out.println(logStr.toString());
         }
     }
