@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class Endpoint implements Serializable {
     private String ip;
     private Integer port;
-//    private String serviceName;
+    private String serviceName;
 
     public Endpoint(){
 
@@ -17,7 +17,7 @@ public class Endpoint implements Serializable {
     public Endpoint(String ip, Integer port, String serviceName) {
         this.ip = ip;
         this.port = port;
-//        this.serviceName = serviceName;
+        this.serviceName = serviceName;
     }
 
     public String getIp() {
@@ -36,20 +36,20 @@ public class Endpoint implements Serializable {
         this.port = port;
     }
 
-//    public String getServiceName() {
-//        return serviceName;
-//    }
-//
-//    public void setServiceName(String serviceName) {
-//        this.serviceName = serviceName;
-//    }
+    public String getServiceName() {
+        return serviceName;
+    }
+
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
+    }
 
     @Override
     public String toString() {
         return "Endpoint{" +
                 "ip='" + ip + '\'' +
                 ", port=" + port +
-//                ", serviceName='" + serviceName + '\'' +
+                ", serviceName='" + serviceName + '\'' +
                 '}';
     }
 

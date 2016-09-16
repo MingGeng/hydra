@@ -38,18 +38,18 @@ public class TraceService implements RegisterService, CollectorService {
         try {
             hydraService.push(spanList);
         } catch (Exception e) {
-            logger.warn("Trace data push failure~");
+            logger.warn("Trace data push failure~ spanList="+spanList,e);
         }
     }
 
     @Override
     public boolean registerService(String name, List<String> services) {
-       // logger.info(name + " " + services);
+        logger.info("TraceService#registerService "+name + " " + services);
         try {
             this.registerInfo = leaderService.registerClient(name, services);
         } catch (Exception e) {
             logger.error("[Hydra] Client global config-info cannot regist into the hydra system",e);
-            logger.warn("[Hydra] Client global config-info cannot regist into the hydra system");
+            logger.warn("[Hydra] Client global config-info cannot regist into the hydra system",e);
         }
         if (registerInfo != null) {
             logger.info("[Hydra] Global registry option is ok!");
@@ -61,12 +61,12 @@ public class TraceService implements RegisterService, CollectorService {
     /*更新注册信息*/
     @Override
     public boolean registerService(String appName, String serviceName) {
-        logger.info(appName + " " + serviceName);
+        logger.info("TraceService#registerService "+appName + " " + serviceName);
         String serviceId = null;
         try {
             serviceId = leaderService.registerClient(appName, serviceName);
         } catch (Exception e) {
-            logger.warn("[Hydra] client cannot regist service <" + serviceName + "> into the hydra system");
+            logger.warn("[Hydra] client cannot regist service <" + serviceName + "> into the hydra system",e);
         }
         if (serviceId != null) {
             logger.info("[Hydra] Registry ["+serviceName+"] option is ok!");
