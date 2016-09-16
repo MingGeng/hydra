@@ -140,7 +140,7 @@ public class HydraFilter implements Filter {
 //            logger.info("HydraFilter#invoke ################### End ###################  "+new Date()+"\n\n");
             long e = System.currentTimeMillis();
             logStr.append("调用完成 consume "+(e-s)+" millisecond.");
-            System.out.println(logStr.toString());
+            logger.debug(logStr.toString());
         }
     }
 
